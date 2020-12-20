@@ -36,7 +36,7 @@ class Order(models.Model):
     order_name = models.TextField(max_length=400)
 
     def __str__(self):
-        return str(self.recipe)
+        return self.recipe
 
     class Meta:
         ordering = ('recipe', )
