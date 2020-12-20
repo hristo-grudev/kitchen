@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Рецепти</title>
+</head>
+<body>
+    <h1>{{recipe_name}}</h1>
+    <ul>
+        {% for product in products_names %}
+        <li>
+            <button>{{product.name}}</button>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
