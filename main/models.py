@@ -31,7 +31,7 @@ class Main(models.Model):
 
 
 class Order(models.Model):
-    recipe = models.ForeignKey(Recipes, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipes, on_delete=models.DO_NOTHING)
     order_id = models.IntegerField()
     order_name = models.TextField(max_length=400)
 

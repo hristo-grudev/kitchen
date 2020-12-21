@@ -1,7 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
+from .decorators import group_required
+from .forms import RecipesForm
 from main.models import Recipes, Products, Main
 from random import choice
+
 
 def list_recipes(request):
     products = Products.objects.filter(name__icontains='гъби').values('id', 'name')
@@ -20,3 +24,25 @@ def list_recipes(request):
 
     context = {'recipe_name': recipe_name, 'products_names': products_names, 'products_for_recipe': products_for_recipe}
     return render(request, 'index.html', context)
+
+
+def home_page(request):
+    return render(request, 'home.html')
+
+
+@login_required(login_url="register user")
+def products_page(request):
+    context = {
+        'recipesForm': RecipesForm,
+    }
+    if context['recipesForm']:
+        print(RecipesForm)
+    return render(request, 'products.html', context)
+
+
+@group_required(groups=['God User'])
+def contacts_page(request):
+    context = {
+        'tel': '0883358501',
+    }
+    return render(request, 'contacts.html', context)

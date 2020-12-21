@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} Products {% endblock %}
+
+{% block body %}
+
+<h2>Recipes Page</h2>
+
+    <form action="{% url 'products' %}" method="post">
+
+        {% csrf_token %}
+        {{recipesForm}}
+
+        <input type="submit" value="Add recipe" class="btn btn-success">
+    </form>
+
+
+{% endblock %}
