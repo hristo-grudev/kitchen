@@ -1,19 +1,27 @@
 {% extends 'base.html' %}
 
+
 {% block title %} Register {% endblock %}
 
 {% block body %}
+{% load bootstrap4 %}
 
-<div class="container">
-    <h1>Register Form</h1>
+<h1 class="text-center">Register Form</h1>
 
+<div class="row d-flex justify-content-center">
 
-    <form action="{% url 'register user' %}" method="post">
+    <form action="{% url 'register user' %}" method="POST" enctype="multipart/form-data">
 
         {% csrf_token %}
-        {{form}}
-
-        <input type="submit" value="Register" class="btn btn-success">
+        {% for field in user_form %}
+            {% bootstrap_field field %}
+        {% endfor %}
+        {% for field in profile_form %}
+            {% bootstrap_field field %}
+        {% endfor %}
+        {% buttons %}
+        <button class="btn btn-primary">Register</button>
+        {% endbuttons %}
     </form>
 </div>
 
