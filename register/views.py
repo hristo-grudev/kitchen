@@ -14,8 +14,8 @@ def register_user(request):
         }
         return render(request, 'register.html', context)
     else:
-        user_form = RegisterForm(request.POST)
-        profile_form = ProfileForm(request.POST, request.FILES)
+        user_form = RegisterForm(data=request.POST)
+        profile_form = ProfileForm(data=request.POST, request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()  # add user
             profile = profile_form.save(commit=False)  # не го запазва преди да направи връзката 1 към 1
@@ -40,7 +40,7 @@ def login_user(request):
         }
         return render(request, 'login.html', context)
     else:
-        login_form = LoginForm(request.POST)
+        login_form = LoginForm(data=request.POST)
         if login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
