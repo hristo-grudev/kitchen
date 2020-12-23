@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
 from .decorators import group_required
 from .forms import RecipesForm
@@ -27,22 +29,62 @@ def list_recipes(request):
 
 
 def home_page(request):
+
     return render(request, 'home.html')
 
 
-@login_required(login_url="register user")
+@group_required(groups=['God User'])
 def products_page(request):
+    recipes_list = Recipes.objects.all()
+    paginator = Paginator(recipes_list, 25)
+    page = request.GET.get('page')
+    try:
+        recipes = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        recipes = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        recipes = paginator.page(paginator.num_pages)
     context = {
         'recipesForm': RecipesForm,
+        'recipes': recipes,
     }
     if context['recipesForm']:
         print(RecipesForm)
     return render(request, 'products.html', context)
 
 
-@group_required(groups=['God User'])
+@login_required(login_url="register user")
 def contacts_page(request):
     context = {
         'tel': '0883358501',
     }
     return render(request, 'contacts.html', context)
+
+
+def view_recipe(request):
+    context = {
+        'tel': '0883358501',
+    }
+    return render(request, 'recipe.html', context)
+
+
+class RecipesListView(ListView):
+    template_name = 'products.html'
+    model = Recipes
+    context_object_name = 'recipes'
+    paginate_by = 25
+
+
+class RecipesDetailsView(DetailView):
+    model = Recipes
+    template_name = 'recipe.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        recipe = context['recipes']
+
+        context['heading_text'] = f'{recipe.name} details'
+        return context

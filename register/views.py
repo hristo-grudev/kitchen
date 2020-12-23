@@ -15,7 +15,8 @@ def register_user(request):
         return render(request, 'register.html', context)
     else:
         user_form = RegisterForm(data=request.POST)
-        profile_form = ProfileForm(data=request.POST, request.FILES)
+        profile_form = ProfileForm(data=request.POST, files=request.FILES)
+        print(profile_form.errors)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()  # add user
             profile = profile_form.save(commit=False)  # не го запазва преди да направи връзката 1 към 1
