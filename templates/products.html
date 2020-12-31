@@ -24,18 +24,17 @@
 {% if page_obj.has_previous %}
     <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
 {% endif %}
-{% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}">Next</a>
-{% endif %}
 
-{% for num in recipes.paginator.page_range %}
-  {% ifequal num recipes.number %}
-    <span class="current"><b>{{ num }}</b></span>
+{% for num in page_obj.paginator %}
+  {% ifequal num.number page_obj.number %}
+    <span class="current"><b>{{ num.number }}</b></span>
   {% else %}
-    <a href="?page={{ num }}"> {{ num }}</a>
+    <a href="?page={{ num.number }}"> {{ num.number }}</a>
   {% endifequal %}
 {% endfor %}
 
-{% include "paginator.html" %}
+{% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+{% endif %}
 
 {% endblock %}

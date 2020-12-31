@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="692ab798-ebd1-4a34-8754-4cd637f35e41" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/recipes/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recipes/contact.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recipes/contactthanks.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recipes/food_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recipes/recipe_add.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recipes/recipe_add_thanks.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recipes/recipe_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recipes/recipe_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recipes/search.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recipes/test_recipe.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/recipes/test_recipe.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/kitchen.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kitchen.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/products.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/products.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/recipe.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/recipe.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +37,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/manage.py" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -83,9 +79,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="D:\Miniconda3\envs\baticho\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/manage.py" />

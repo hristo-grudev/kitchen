@@ -80,11 +80,14 @@ class RecipesListView(ListView):
 class RecipesDetailsView(DetailView):
     model = Recipes
     template_name = 'recipe.html'
+    context_object_name = 'recipes'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         print(context)
         recipe = context['recipes']
+        products_list = Main.objects.filter(recipe__exact=recipe.id).select_related('product')
 
         context['heading_text'] = f'{recipe.name} details'
+        context['products_list'] = products_list
         return context
