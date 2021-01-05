@@ -74,7 +74,7 @@ class RecipesListView(ListView):
     template_name = 'products.html'
     model = Recipes
     context_object_name = 'recipes'
-    paginate_by = 25
+    paginate_by = 24
 
 
 class RecipesDetailsView(DetailView):
@@ -84,7 +84,6 @@ class RecipesDetailsView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(context)
         recipe = context['recipes']
         products_list = Main.objects.filter(recipe__exact=recipe.id).select_related('product')
 

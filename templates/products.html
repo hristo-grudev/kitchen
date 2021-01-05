@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Products {% endblock %}
 
@@ -16,7 +17,19 @@
 
 <div class="btn-group-vertica" role="group" aria-label="Basic example">
 {% for recipe in recipes %}
-    <a href="{% url 'view recipe' recipe.id %}" class="btn btn-success">{{ recipe.name }}</a>
+    <a href="{% url 'view recipe' recipe.id %}" class="btn btn-success">
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <img src="{% static recipe.url  %}" alt="{% static 'images/1.jpj' %}" class="img-responsive">
+            <div class="carousel-caption">
+              <h2>{{recipe.name}}</h2>
+            </div>
+
+        </div>
+    </div>
+        </a>
 {% endfor %}
 </div>
 

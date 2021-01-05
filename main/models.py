@@ -3,6 +3,7 @@ from django.db import models
 
 class Recipes(models.Model):
     name = models.CharField("recipe name", max_length=200, )
+    url = models.URLField('url', default=None)
 
     def __str__(self):
         return self.name

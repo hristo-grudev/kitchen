@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Products {% endblock %}
 
 {% block body %}
 
 <h2>{{object.name}}</h2>
+<img src="{% static object.url  %}" alt="{% static 'images/1.jpj' %}">
 <ul>
 {% for product in products_list %}
 <li>{{product.product}} - {{product.qty}}</li>

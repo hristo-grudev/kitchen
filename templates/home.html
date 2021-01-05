@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Home Page {% endblock %}
 
-{% block body %} <h2>Кухня</h2> {% endblock %}
+{% block body %} <h2>Кухня</h2>
+
+<img src="{% static 'images/almond-cookies1.jpg' %}">
+
+{% endblock %}
