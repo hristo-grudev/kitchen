@@ -1,6 +1,10 @@
+import random
+
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render
+from django.views import View
 from django.views.generic import ListView, DetailView
 
 from .decorators import group_required
@@ -55,7 +59,7 @@ def products_page(request):
     return render(request, 'products.html', context)
 
 
-@login_required(login_url="register user")
+@login_required(login_url="login user")
 def contacts_page(request):
     context = {
         'tel': '0883358501',
@@ -70,11 +74,37 @@ def view_recipe(request):
     return render(request, 'recipe.html', context)
 
 
-class RecipesListView(ListView):
+class HomeView(ListView):
+    template_name = 'home.html'
+    context_object_name = 'random'
+    model = Recipes
+
+    random_number = random.randint(1, 6700)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        random_number = random.randint(1, 6700)
+        random_recipe = Recipes.objects.filter(id__exact=random_number).values('id', 'name', 'url')
+        context['random_recipe'] = random_recipe[0]
+
+        return context
+
+
+class RecipesListView(LoginRequiredMixin, ListView):
+    login_url = 'login user'
+    redirect_field_name = 'view cbv recipes'
+
     template_name = 'products.html'
     model = Recipes
     context_object_name = 'recipes'
-    paginate_by = 24
+    paginate_by = 6
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            return Recipes.objects.filter(name__icontains=query)
+        else:
+            return Recipes.objects.all()
 
 
 class RecipesDetailsView(DetailView):

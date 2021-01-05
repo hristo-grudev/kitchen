@@ -3,8 +3,13 @@
 
 {% block title %} Home Page {% endblock %}
 
-{% block body %} <h2>Кухня</h2>
+{% block body %} <h2>{{random_recipe.name}}</h2>
 
-<img src="{% static 'images/almond-cookies1.jpg' %}">
+
+
+<img src="{% static random_recipe.url %}">
+<div>
+<a href="{% url 'view recipe' random_recipe.id %}" class="btn btn-outline-primary">Виж</a>
+</div>
 
 {% endblock %}

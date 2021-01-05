@@ -15,9 +15,13 @@
         <input type="submit" value="Add recipe" class="btn btn-success">
     </form>
 
+    <form method="GET" action="" id="searchform">
+        <input class="searchfield" id="searchbox" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search..."/>
+    </form>
+
 <div class="btn-group-vertica" role="group" aria-label="Basic example">
 {% for recipe in recipes %}
-    <a href="{% url 'view recipe' recipe.id %}" class="btn btn-success">
+    <a href="{% url 'view recipe' recipe.id %}" class="btn btn-outline-primary">
     <div class="row">
 
         <div class="col-md-12">
@@ -35,19 +39,19 @@
 
 
 {% if page_obj.has_previous %}
-    <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
+    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Prev</a>
 {% endif %}
 
 {% for num in page_obj.paginator %}
   {% ifequal num.number page_obj.number %}
     <span class="current"><b>{{ num.number }}</b></span>
   {% else %}
-    <a href="?page={{ num.number }}"> {{ num.number }}</a>
+    <a href="?page={{ num.number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"> {{ num.number }}</a>
   {% endifequal %}
 {% endfor %}
 
 {% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a>
 {% endif %}
 
 {% endblock %}
