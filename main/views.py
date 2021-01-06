@@ -2,11 +2,13 @@ import random
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail, BadHeaderError
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.shortcuts import render
-from django.views import View
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 
+from main.forms import ContactForm
 from .decorators import group_required
 from .forms import RecipesForm
 from main.models import Recipes, Products, Main
@@ -121,3 +123,24 @@ class RecipesDetailsView(DetailView):
         context['heading_text'] = f'{recipe.name} details'
         context['products_list'] = products_list
         return context
+
+
+def contactView(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(name, message, from_email, ['hr.grudev@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('success')
+    return render(request, "contacts.html", {'form': form})
+
+
+def successView(request):
+    return HttpResponse('Success! Thank you for your message.')

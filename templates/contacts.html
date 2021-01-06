@@ -1,10 +1,50 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Contacts {% endblock %}
 
-{% block body %} <h2>Contacts Page</h2>
+{% block body %}
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Eat and Drink Contacts</h1>
+        <p class="lead text-muted mb-0">What would you like</p>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header bg-primary text-white"><i class="fa fa-envelope"></i> Contact us.
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                        {% csrf_token %}
+                        {{ form.as_p }}
 
+                        <div class="mx-auto">
+                        <button type="submit" class="btn btn-primary text-right">Submit</button>
+                        </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="card bg-light mb-3">
+                <div class="card-header bg-success text-white text-uppercase"><i class="fa fa-home"></i> Address</div>
+                <div class="card-body">
+                    <p>Shipka 8</p>
+                    <p>5400 Sevlievo</p>
+                    <p>Bulgaria</p>
+                    <p>Email : hr.grudev@gmail.com</p>
+                    <p>Tel. +359 883 358 501</p>
 
-<h3>Call me: {{tel}}</h3>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
