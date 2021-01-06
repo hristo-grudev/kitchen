@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <title>{% block title %} {% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css.css' %}">
+
+    {% block css %}
+    {% endblock %}
+
 </head>
 <body>
 <header>
@@ -27,8 +30,9 @@
                 {% endif %}
                 </span>
             </li>
+            <li class="nav-item">
             {% block search %} {% endblock %}
-
+            </li>
         </ul>
     </nav>
 </header>

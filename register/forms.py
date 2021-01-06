@@ -23,7 +23,13 @@ class LoginForm(AuthenticationForm):
 
 
 class ProfileForm(forms.ModelForm):
+
 	class Meta:
 		model = UserProfile
 		exclude = ('user',)
+
+	def __init__(self, *args, **kwargs):
+		super(ProfileForm, self).__init__(*args, **kwargs)
+		self.fields['date_of_birth'].required = False
+		self.fields['profile_image'].required = False
 

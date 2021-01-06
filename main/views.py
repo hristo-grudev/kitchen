@@ -84,9 +84,9 @@ class HomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         max_id = Recipes.objects.all().values('id').order_by("-id")[0]
-        random_number = random.randint(1, max_id['id']+1)
-        random_recipe = Recipes.objects.filter(id__exact=random_number).values('id', 'name', 'url')
-        context['random_recipe'] = random_recipe[0]
+        recipe_id1, recipe_id2, recipe_id3 = random.sample(range(1, max_id['id']+1), 3)
+        random_recipe = Recipes.objects.filter(id__in=[recipe_id1, recipe_id2, recipe_id3]).values('id', 'name', 'url')
+        context['random_recipe'] = random_recipe
 
         return context
 

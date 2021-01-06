@@ -24,7 +24,7 @@ def register_user(request):
             profile.save()
 
             login(request, user)  # login user
-            return redirect('register user')
+            return redirect('home')
 
         context = {
             'user_form': RegisterForm(),
