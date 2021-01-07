@@ -12,12 +12,12 @@ class RecipesForm(forms.ModelForm):
 
 class ContactForm(forms.Form):
 	name = forms.CharField(required=True)
-	from_email = forms.EmailField(required=True)
+	email = forms.EmailField(required=True)
 	message = forms.CharField(widget=forms.Textarea, required=True)
 
 	name.widget.attrs.update({'class': 'form-control', 'aria-describedby': "emailHelp", 'placeholder': "Enter name"})
-	from_email.widget.attrs.update({'class': 'form-control', 'aria-describedby': "emailHelp", 'placeholder': "Enter email"})
-	message.widget.attrs.update({'class': 'form-control', 'aria-describedby': "emailHelp", 'placeholder': "Enter name"})
+	email.widget.attrs.update({'class': 'form-control', 'aria-describedby': "emailHelp", 'placeholder': "Enter email"})
+	message.widget.attrs.update({'class': 'form-control', 'aria-describedby': "emailHelp"})
 
 	def clean(self):
 		cleaned_data = super(ContactForm, self).clean()

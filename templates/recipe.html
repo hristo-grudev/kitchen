@@ -12,4 +12,9 @@
 <li>{{product.product}} - {{product.qty}}</li>
 {% endfor %}
 </ul>
+{% if this_is_ordered %}
+<p>{{this_is_ordered}}</p>
+{% else %}
+<a class="nav-link" href="{% url 'shopping cart' %}">Добави</a>
+{% endif %}
 {% endblock %}

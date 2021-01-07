@@ -4,11 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail, BadHeaderError
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 
 from main.forms import ContactForm
+from orders.models import UserFood, UserOrders
 from .decorators import group_required
 from .forms import RecipesForm
 from main.models import Recipes, Products, Main
@@ -122,6 +123,15 @@ class RecipesDetailsView(DetailView):
 
         context['heading_text'] = f'{recipe.name} details'
         context['products_list'] = products_list
+
+        order = UserFood.objects.filter(user__exact=self.request.user.id).filter(status=False).select_related('order').values('order')
+        if order:
+            ordered_recipes = UserOrders.objects.filter(order_id__exact=order[0]['order']).filter(order_start__isnull=False).select_related('recipe').values('recipe')
+
+            for item in ordered_recipes:
+                if recipe.id in list(item.values()):
+                    context['this_is_ordered'] = 'You already ordered this'
+
         return context
 
 
